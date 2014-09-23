@@ -1,0 +1,154 @@
+// COLORS
+@light: #ecf0f1;
+@dark: #34495e;
+@strongtxt: #e74c3c;
+
+@blue: #3498db;
+@orange: #f39c12;
+@red: #e74c3c;
+@green: #2ecc71;
+
+// MIXINS
+.txtshdw(@color,@offset,@perc){
+  text-shadow: darken(@color,@perc) @offset @offset @offset;
+}
+  
+// GENERAL STYLE
+@import url(http://fonts.googleapis.com/css?family=Raleway:400,700);
+html,body{height:100%;}
+body {
+  font-family: 'Raleway', sans-serif;
+  color: #ecf0f1;
+  background-color: #34495e;
+}
+
+// GAME ELEMENTS
+#player {
+  @size: 80px;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-left: (-@size/2) + (-@size/2);
+  cursor: pointer;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border-width: @size;
+  border-style: solid;
+  border-top-color: @blue;
+  border-left-color: @orange;
+  border-bottom-color: @green;
+  border-right-color: @red;
+  transition: .15s ease-in-out;
+  
+  &:hover {
+    transform: scale(1.2);
+  }
+}
+
+span {
+  @size: 30px;
+  
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -@size/2;
+  height: @size;
+  width: @size;
+  border-radius: @size/3;
+  
+  &.blue {
+    background-color: @blue;
+  }
+  &.orange {
+    background-color: @orange;
+  }
+  &.green {
+    background-color: @green;
+  }
+  &.red {
+    background-color: @red;
+  }
+}
+
+#modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: fade(@dark,90%);
+  z-index: 7;
+}
+
+#title,
+#msg{
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  text-align: center;
+  z-index: 9;
+  color: @light;
+}
+#title {
+  font-weight: 700;
+  font-size: 8vmin;
+  line-height: 100%;
+  letter-spacing: -.05em;
+  .txtshdw(@dark,2px,30%);
+}
+#msg {
+  top: 55%;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  .txtshdw(@dark,1px,30%);
+}
+
+#start {
+  position: absolute;
+  top: 40%;
+  left: 45%;
+  padding: 6px 12px;
+  z-index: 9;
+  background-color: @strongtxt;
+  color: @light;
+  .txtshdw(@strongtxt,1px,50%);
+  border: 0;
+  font-size: 1.5rem;
+  padding: .5rem 1rem;
+}
+
+#score {
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  font-weight: 700;
+  font-size: 2rem;
+  padding: 10px 20px;
+  border-radius: 6px;
+  background-color: @light;
+  color: @dark;
+  
+  &.good {
+    animation: good .3s ease-in-out forwards;
+  }
+  &.bad {
+    animation: bad .3s ease-in-out forwards;
+  }
+}
+
+@keyframes good {
+  50% {
+    transform: scale(1.4);
+    background-color: @green;
+  }
+}
+@keyframes bad {
+  50% {
+    transform: scale(.6);
+    background-color: @red;
+  }
+}
